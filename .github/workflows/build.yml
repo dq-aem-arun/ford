@@ -7,20 +7,9 @@ on:
     branches: [ main, dev ]
 
 jobs:
-  setup:
-    name: Environment Setup
-    runs-on: ubuntu-latest
-    outputs:
-      cache-key: ${{ steps.cache-key.outputs.key }}
-    steps:
-      - name: Generate Cache Key
-        id: cache-key
-        run: echo "key=${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}" >> $GITHUB_OUTPUT
-
   build:
     name: Clean & Install
     runs-on: ubuntu-latest
-    needs: setup
 
     steps:
       - name: Checkout Code
@@ -36,7 +25,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/.m2/repository
-          key: ${{ needs.setup.outputs.cache-key }}
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
             ${{ runner.os }}-maven-
 
@@ -66,11 +55,11 @@ jobs:
           distribution: 'temurin'
           java-version: '11'
 
-      - name: Restore Maven Cache
+      - name: Cache Maven Packages
         uses: actions/cache@v4
         with:
           path: ~/.m2/repository
-          key: ${{ needs.setup.outputs.cache-key }}
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
             ${{ runner.os }}-maven-
 
@@ -84,26 +73,27 @@ jobs:
           name: test-results
           path: target/surefire-reports/
 
-  # deploy:
-  #   name: Deploy to AEM (DEV)
-  #   runs-on: ubuntu-latest
-  #   if: github.ref == 'refs/heads/dev'
-  #   needs: test
-
-  #   steps:
-  #     - name: Download Built AEM Package
-  #       uses: actions/download-artifact@v4
-  #       with:
-  #         name: aem-package
-  #         path: ./dist
-
-  #     - name: Deploy to AEM
-  #       run: |
-  #         for pkg in ./dist/*.zip; do
-  #           curl -u ${{ secrets.AEM_USER }}:${{ secrets.AEM_PASS }} \
-  #             -F file=@"$pkg" \
-  #             -F name=$(basename "$pkg") \
-  #             -F force=true \
-  #             -F install=true \
-  #             https://${{ secrets.AEM_DEV_URL }}/crx/packmgr/service.jsp
-  #         done
+# Uncomment and customize this if you want to deploy on 'dev' branch
+#  deploy:
+#    name: Deploy to AEM (DEV)
+#    runs-on: ubuntu-latest
+#    if: github.ref == 'refs/heads/dev'
+#    needs: test
+#
+#    steps:
+#      - name: Download Built AEM Package
+#        uses: actions/download-artifact@v4
+#        with:
+#          name: aem-package
+#          path: ./dist
+#
+#      - name: Deploy to AEM
+#        run: |
+#          for pkg in ./dist/*.zip; do
+#            curl -u ${{ secrets.AEM_USER }}:${{ secrets.AEM_PASS }} \
+#              -F file=@"$pkg" \
+#              -F name=$(basename "$pkg") \
+#              -F force=true \
+#              -F install=true \
+#              https://${{ secrets.AEM_DEV_URL }}/crx/packmgr/service.jsp
+#          done

@@ -39,10 +39,44 @@ jobs:
           path: |
             **/target/*.zip
             **/target/*.jar
+          retention-days: 2
 
-      - name: Upload Test Reports
+      - name: Upload Test Reports (XML)
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: test-results
           path: '**/target/surefire-reports'
+          retention-days: 2
+
+      - name: Generate Surefire HTML Report
+        run: mvn surefire-report:report-only
+
+      - name: Copy HTML Reports to Page Directory
+        run: |
+          mkdir -p report-html
+          find . -type d -name 'surefire-report' -exec cp -r {} report-html/ \;
+
+      - name: Upload Pages Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./report-html
+
+  deploy:
+    name: Deploy HTML Report to GitHub Pages
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.ref == 'refs/heads/main'
+
+    permissions:
+      pages: write
+      id-token: write
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v3

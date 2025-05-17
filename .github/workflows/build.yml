@@ -39,7 +39,7 @@ jobs:
           path: |
             **/target/*.zip
             **/target/*.jar
-          retention-days: 2
+          retention-days: 1
 
       - name: Upload Test Reports (XML)
         if: always()
@@ -52,10 +52,11 @@ jobs:
       - name: Generate Surefire HTML Report
         run: mvn surefire-report:report-only
 
-      - name: Copy HTML Reports to Page Directory
+      - name: Copy Surefire Reports Folder to Pages Directory
         run: |
           mkdir -p report-html
-          find . -type d -name 'surefire-report' -exec cp -r {} report-html/ \;
+          cp -r core/target/reports/* report-html/
+          cp report-html/surefire.html report-html/index.html
 
       - name: Upload Pages Artifact
         uses: actions/upload-pages-artifact@v3

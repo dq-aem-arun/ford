@@ -32,14 +32,14 @@ jobs:
       - name: Maven Clean Install (Build All Modules)
         run: mvn clean install --batch-mode --update-snapshots
 
-      - name: Upload AEM Packages (ZIPs & JARs)
-        uses: actions/upload-artifact@v4
-        with:
-          name: aem-packages
-          path: |
-            **/target/*.zip
-            **/target/*.jar
-          retention-days: 1
+      # - name: Upload AEM Packages (ZIPs & JARs)
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: aem-packages
+      #     path: |
+      #       **/target/*.zip
+      #       **/target/*.jar
+      #     retention-days: 1
 
       - name: Generate Surefire HTML Report
         run: mvn surefire-report:report-only

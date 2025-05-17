@@ -2,9 +2,9 @@ name: AEM CI Pipeline
 
 on:
   push:
-    branches: [ main, dev ]
+    branches: [main, dev]
   pull_request:
-    branches: [ main, dev ]
+    branches: [main, dev]
 
 jobs:
   build:
@@ -74,7 +74,7 @@ jobs:
       id-token: write
 
     environment:
-      name: ${{ github.ref == 'refs/heads/main' && 'github-pages' || 'github-pages-dev' }}
+      name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
 
     steps:

@@ -62,5 +62,13 @@ class HelloWorldModelTest {
         assertTrue(StringUtils.contains(msg, resource.getResourceType()));
         assertTrue(StringUtils.contains(msg, page.getPath()));
     }
+        @Test
+    void testGetMessageAgain() throws Exception {
+        // some very basic junit tests
+        String msg = hello.getMessage();
+        assertNotNull(msg);
+        assertTrue(StringUtils.contains(msg, resource.getResourceType()));
+        assertTrue(StringUtils.contains(msg, page.getPath()));
+    }
 
 }

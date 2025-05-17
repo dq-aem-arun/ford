@@ -22,7 +22,7 @@
 > Please tag **one of the leads** below to review this PR:
 
 - @dq-aem-arun
-- @dq-aem-manojkumar
+- @arunkumard1018
 
 ---
 

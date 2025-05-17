@@ -1,0 +1,103 @@
+<sly
+  data-sly-use.clientlib="core/wcm/components/commons/v1/templates/clientlib.html"
+/>
+<sly data-sly-call="${clientlib.css @ categories='ford.components.navbar'}" />
+<sly data-sly-call="${clientLib.js @ categories='ford.components.navbar'}" />
+
+<sly data-sly-use.nav="com.aem.ford.core.models.Navbar" class="cmp-title">
+  <nav class="custom-navbar">
+    <div class="navbar-left">
+      <ul>
+        <sly data-sly-list.item="${nav.navItems}">
+          <li  class="${item.label == 'Shop' ? 'shop-label' : (item.label == 'Vehicle' ? 'vehicle-label' : (item.label == 'Support&Services' ? 'support-label' : ''))}"
+          id="${item.label == 'Shop' ? 'shopToggle' : (item.label == 'Vehicle' ? 'vehicleToggle' : (item.label == 'Support&Services' ? 'supportToggle' : ''))}">
+           
+              ${item.label}
+            
+          </li>
+        </sly>
+      </ul>
+    </div>
+
+    <div class="navbar-middle">
+      <a href="http://localhost:4502/editor.html/content/ford/us/en/home-page.html">
+        <img
+          class="logo"
+          src="${nav.imagePath @ context='uri'}"
+          alt="Ford Logo"
+        />
+      </a>
+    </div>
+
+    <div class="navbar-right">
+
+    <input type="text" id="searchInput" placeholder="Search..." class="search-input" />
+    <a href="#" id="searchIcon">
+      <img class="icon" src="${nav.searchPath @ context='uri'}" alt="Search" />
+    </a>
+    
+
+
+      <a href="#" class="user-icon" id="userToggle">
+        <img class="icon" src="${nav.userPath @ context='uri'}" alt="User" />
+      </a>
+      <a href="#" class="globe-icon" id="globeToggle"
+        ><img
+          class="icon"
+          src="${nav.globePath @ context='uri'}"
+          alt="Language"
+      /></a>
+    </div>
+  </nav>
+
+
+
+
+  
+
+  <!-- User Icon Drop Down -->
+  <div class="user-menu" id="userMenu">
+  <div class="container"
+  data-sly-resource="${'userContainer' @ resourceType='core/wcm/components/container/v1/container'}"
+></div>
+  </div>
+
+  <!-- Language Icon Drop Down -->
+
+  <div class="globe-menu" id="globeMenu">
+  <div class="container"
+  data-sly-resource="${'globeContainer' @ resourceType='core/wcm/components/container/v1/container'}"
+></div>
+  </div>
+
+  <!--  Shop Drop Down -->
+  <div class="shop-menu" id="shopMenu">
+    <div class="container"
+    data-sly-resource="${'shopContainer' @ resourceType='core/wcm/components/container/v1/container'}"
+  ></div>
+  </div>
+
+  <!--/* Support Menu */-->
+
+  <div class="support-menu" id="supportMenu">
+
+    <div class="container"
+    data-sly-resource="${'supportContainer' @ resourceType='core/wcm/components/container/v1/container'}"
+  ></div>
+  </div> 
+
+
+
+  <!--/* Vehicle Menu */-->
+  <div class="vehicle-menu" id="vehicleMenu">
+
+
+  <div class="container"
+  data-sly-resource="${'navItems' @ resourceType='ford/components/content/verticletab'}"
+></div>
+  </div>
+
+
+
+
+</sly>

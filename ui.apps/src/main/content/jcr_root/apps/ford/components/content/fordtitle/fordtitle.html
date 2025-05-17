@@ -1,0 +1,35 @@
+<sly data-sly-use.fordTitle="com.aem.ford.core.models.FordTitle"
+     data-sly-use.placeholderTemplate="core/wcm/components/commons/v1/templates.html">
+
+    <sly data-sly-test.hasContent="${!fordTitle.empty}">
+        <div class="ford-title__container"
+             style="margin: ${fordTitle.margin @ context='unsafe'}; padding: ${fordTitle.padding @ context='unsafe'};">
+             
+            <sly data-sly-test="${fordTitle.title}">
+                <h1 class="ford-title__title"
+                    style="font-size: ${fordTitle.titleFontSize @ context='styleToken'}; 
+                           font-weight: ${fordTitle.titleFontWeight @ context='styleToken'}; 
+                          color: ${fordTitle.titleColor @ context='styleToken'}; margin: 0px; padding:0px;">
+                    ${fordTitle.title}
+                </h1>
+            </sly>
+
+            <sly data-sly-test="${fordTitle.description}">
+                <p class="ford-title__description"
+                   style="font-size: ${fordTitle.descriptionFontSize @ context='styleToken'}; 
+                          font-weight: ${fordTitle.descriptionFontWeight @ context='styleToken'}; 
+                          color: ${fordTitle.descriptionColor @ context='styleToken'}; 
+                          width:${fordTitle.descriptionWidth @ context='styleToken'}">
+                    ${fordTitle.description}
+                   
+                </p>
+            </sly>
+        </div>
+    </sly>
+
+    <!-- Placeholder logic -->
+    <sly data-sly-call="${placeholderTemplate.placeholder @ isEmpty=!hasContent}"></sly>
+</sly>
+
+
+

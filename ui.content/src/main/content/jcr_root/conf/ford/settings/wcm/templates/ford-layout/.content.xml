@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
+    jcr:primaryType="cq:Template">
+    <jcr:content
+        cq:lastModified="{Date}2025-05-07T14:43:07.047+05:30"
+        cq:lastModifiedBy="admin"
+        cq:templateType="/conf/ford/settings/wcm/template-types/page"
+        jcr:description="layout-page"
+        jcr:primaryType="cq:PageContent"
+        jcr:title="ford-layout"
+        status="enabled"/>
+</jcr:root>

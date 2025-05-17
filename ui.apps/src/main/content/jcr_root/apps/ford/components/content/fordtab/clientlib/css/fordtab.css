@@ -1,0 +1,95 @@
+/* Default Styling */
+.ford_tab .cmp-tabs__tablist {
+    display: flex;
+    border-bottom: none;
+    margin: 0px 50px;
+    justify-content: space-between;
+    border: black;
+
+}
+.ford_tab .cmp-tabs__tab {
+    position: relative;
+    padding:0px 50px;
+    font-size: 20px; 
+    font-weight: 400;
+    color: #666666;
+    text-decoration: none;
+    background: none;
+    cursor: pointer;
+    margin-left: 15px;
+    /* margin:0px 10px; */
+}
+
+.ford_tab .cmp-tabs__tab::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    width: 100%;
+    background-color: #999999;
+    transition: all 5ms ease;
+}
+
+.ford_tab .cmp-tabs__tab--active {
+    color: #0066b3;
+    font-weight: 400;
+    
+    
+}
+
+.ford_tab .cmp-tabs__tab--active::after {
+    background-color: #0066b3;
+    height: 4px;
+}
+
+
+#ford-tab-container{
+    padding: 40px 0px;
+    margin: 0px 50px;
+}
+
+
+
+
+
+/* Style for Suv cars */
+
+.ford_tabSuvCars{
+    margin: 60px 0px;
+}
+.ford_tabSuvCars .cmp-tabs__tablist {
+    display: flex;
+    border: 1px solid rgb(19, 19, 19);
+    border-radius: 3px;
+    width: fit-content;
+    overflow: hidden;
+    /* margin-left:80px; */
+    justify-content: center;
+    
+    
+  }
+  
+  
+  .ford_tabSuvCars .cmp-tabs__tab {
+    font-size: 16px;
+    font-weight: 400;
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+    width: fit-content;
+    margin:0px;
+    text-align: center;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .ford_tabSuvCars .cmp-tabs__tab--active {
+    background-color: #0562D2; 
+    color: white;
+    border-radius: 4px;
+    margin:4px;
+  }
+  
